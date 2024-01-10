@@ -1,9 +1,15 @@
 <?php
 
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PostController;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
+use App\Models\Comment;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
