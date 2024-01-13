@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -39,7 +40,11 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $post->load('user');
+
+        return Inertia('Posts/Show', [
+            'post' => PostResource::make($post)
+        ]);
     }
 
     /**
