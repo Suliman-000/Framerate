@@ -48,6 +48,7 @@
     import InputError from '@/Components/InputError.vue';
     import { router} from "@inertiajs/vue3";
     import SecondaryButton from '@/Components/SecondaryButton.vue';
+    import { useConfirm } from '@/Utilities/Composables/useConfirm';
 
     const props = defineProps(['post', 'comments']);
 
@@ -77,16 +78,32 @@
         onSuccess: () => commentForm.reset(),
     });
 
-    const updateComment = () => commentForm.put(route('comment.update', {
-        comment: commentIsBeingEdited.value,
-        page: props.comments.meta.current_page,
-    }), {
-        onSuccess: cancelEditComment,
-        preserveScroll: true,
-    });
+    const { comfirmation } = useConfirm();
 
-    const deleteComment = (commentId) => router.delete(route('comment.destroy', { comment: commentId, page: props.comments.meta.current_page }), {
-        preserveScroll: true,
-    });
+    const updateComment = async () => {
+        if (! await comfirmation('Are you sure you want to update this comment?')) {
+            commentTextAreaRef.value?.focus();
+
+            return;
+        }
+
+        commentForm.put(route('comment.update', {
+            comment: commentIsBeingEdited.value,
+            page: props.comments.meta.current_page,
+        }), {
+            onSuccess: cancelEditComment,
+            preserveScroll: true,
+        });
+    };
+
+    const deleteComment = async (commentId) => {
+            if (! await comfirmation('Are you sure you want to delete this comment?')) {
+                return;
+            }
+
+            router.delete(route('comment.destroy', { comment: commentId, page: props.comments.meta.current_page }), {
+                preserveScroll: true,
+        });
+    };
 
 </script>

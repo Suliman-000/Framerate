@@ -7,6 +7,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import ConfirmationModalWrapper from '@/Components/ConfirmationModalWrapper.vue';
 // import route from 'vendor/tightenco/ziggy/src/js';
 
 defineProps({
@@ -256,5 +257,7 @@ const menu = [
                 <slot />
             </main>
         </div>
+
+        <ConfirmationModalWrapper />
     </div>
 </template>
