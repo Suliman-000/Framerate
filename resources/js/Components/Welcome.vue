@@ -11,6 +11,11 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                 Welcome to your Jetstream application!
             </h1>
 
+            
+            <p class="text-gray-500 leading-relaxed">
+                (You have to login in to get full access)
+            </p>
+
             <p class="mt-6 text-gray-500 leading-relaxed">
                 Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
                 to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
