@@ -1,7 +1,7 @@
 <template>
     <AppLayout title="Create a Post">
         <Container>
-            <h1 class="text-2xl font-bold">Create a Post</h1>
+            <PageHeading>Create a Post</PageHeading>
 
             <form @submit.prevent="createPost" class="mt-6">
                 <div>
@@ -49,6 +49,7 @@
     import { useForm } from '@inertiajs/vue3';
     import axios from "axios";
     import { isInProduction } from "@/Utilities/environment";
+    import PageHeading from "@/Components/PageHeading.vue";
 
     const form = useForm({
         'title': '',
