@@ -3,10 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Topic;
 use App\Support\PostFixtures;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
-use Symfony\Component\Finder\SplFileInfo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,6 +22,7 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
+            'topic_id' => Topic::factory(),
             'title' => str(fake()->sentence)->beforeLast('.')->title(),
             'body' => Collection::times(4, fn () => fake()->realText(1250))->join(PHP_EOL. PHP_EOL),
         ];
