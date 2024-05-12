@@ -2,7 +2,10 @@
 <template>
     <AppLayout :title="post.title">
         <Container>
-            <PageHeading>{{ post.title }}</PageHeading>
+            <Pill :href="route('posts.index', { topic: post.topic.slug })">
+                {{ post.topic.name }}
+            </Pill>
+            <PageHeading class="mt-3">{{ post.title }}</PageHeading>
             <span class="block mt-1 text-sm text-gray-600">{{ formattedDate }} ago by {{ post.user.name }}</span>
             <article v-html="post.html" class="mt-6 prose prose-sm max-w-none">
 
@@ -44,13 +47,13 @@
     import InputLabel from '@/Components/InputLabel.vue';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
     import { useForm } from '@inertiajs/vue3';
-    import TextArea from '@/Components/TextArea.vue';
     import InputError from '@/Components/InputError.vue';
     import { router} from "@inertiajs/vue3";
     import SecondaryButton from '@/Components/SecondaryButton.vue';
     import { useConfirm } from '@/Utilities/Composables/useConfirm';
     import MarkdownEditor from '@/Components/MarkdownEditor.vue';
-import PageHeading from '@/Components/PageHeading.vue';
+    import PageHeading from '@/Components/PageHeading.vue';
+    import Pill from '@/Components/Pill.vue';
 
     const props = defineProps(['post', 'comments']);
 
