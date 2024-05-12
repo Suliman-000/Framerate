@@ -8,6 +8,7 @@ use App\Http\Resources\TopicResource;
 use App\Models\Topic;
 
 it('should return the correct component', function () {
+
     get(route('posts.index'))
         ->assertComponent('Posts/Index');
 });
@@ -20,6 +21,14 @@ it('passes posts to the view', function () {
 
     get(route('posts.index'))
         ->assertHasPaginatedResource('posts', PostResource::collection($posts->reverse()));
+});
+
+it('passes topics to the view', function () {
+
+    $topics = Topic::factory(3)->create();
+
+    get(route('posts.index'))
+        ->assertHasResource('topics', TopicResource::collection($topics));
 });
 
 it('can filter to a topic', function () {

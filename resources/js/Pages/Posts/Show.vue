@@ -14,7 +14,7 @@
                 <form v-if="$page.props.auth.user" @submit.prevent="() => commentIsBeingEdited ? updateComment() : addComment()" class="mt-4">
                     <div>
                         <InputLabel for="body" class="sr-only">Comment</InputLabel>
-                        <MarkdownEditor ref="commentTextAreaRef" id="body" v-model="commentForm.body" placeholder="Speak your mind..." editorClass="min-h-[160px]" />
+                        <MarkdownEditor ref="commentTextAreaRef" id="body" v-model="commentForm.body" placeholder="Speak your mind..." editorClass="!min-h-[160px]" />
                         <InputError :message="commentForm.errors.body" class="mt-1" />
                     </div>
 
