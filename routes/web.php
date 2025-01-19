@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::middleware([
 
     Route::resource('posts', PostController::class)->only(['create', 'store']);
     Route::resource('posts.comment', CommentController::class)->shallow()->only(['store', 'update', 'destroy']);
+
+    Route::post('/likes/{type}/{id}', [LikeController::class, 'store'])->name('likes.store');
 });
 
 Route::get('posts/{topic?}', [PostController::class, 'index'])->name('posts.index');
