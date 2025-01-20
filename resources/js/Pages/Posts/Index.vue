@@ -7,12 +7,12 @@
 
                 <menu class="flex space-x-1 mt-3 overflow-x-auto py-2">
                     <li>
-                        <Pill :href="route('posts.index')" :filled="! selectedTopic">
+                        <Pill :href="route('posts.index', { query: searchForm.query })" :filled="! selectedTopic">
                             All Posts
                         </Pill>
                     </li>
                     <li v-for="topic in topics" :key="topic.id">
-                        <Pill :href="route('posts.index', { topic: topic.slug })" :filled="topic.id === selectedTopic?.id">
+                        <Pill :href="route('posts.index', { topic: topic.slug, query: searchForm.query })" :filled="topic.id === selectedTopic?.id">
                             {{ topic.name }}
                         </Pill>
                     </li>
@@ -24,6 +24,7 @@
                         <div class="flex space-x-2 mt-1">
                             <TextInput v-model="searchForm.query" class="w-full" id="query" />
                             <SecondaryButton type="submit">Search</SecondaryButton>
+                            <DangerButton v-if="searchForm.query" @click="clearSearch">Clear</DangerButton>
                         </div>
                     </div>
                 </form>
@@ -53,7 +54,8 @@
     import InputLabel from "@/Components/InputLabel.vue";
     import TextInput from "@/Components/TextInput.vue";
     import SecondaryButton from "@/Components/SecondaryButton.vue";
-    import { Link, useForm } from "@inertiajs/vue3";
+    import DangerButton from "@/Components/DangerButton.vue";
+    import { Link, useForm, usePage } from "@inertiajs/vue3";
     import {relativeDate} from "@/Utilities/date.js";
     import PageHeading from "@/Components/PageHeading.vue";
     import Pill from "@/Components/Pill.vue";
@@ -66,8 +68,17 @@
 
     const searchForm = useForm({
         query: props.query,
+        page: 1,
     });
 
-    const search = () => searchForm.get(route('posts.index'));
+    const page = usePage();
+
+    const search = () => searchForm.get(page.url);
+
+    const clearSearch = () => {
+        searchForm.query = '';
+
+        search();
+    };
 
 </script>
